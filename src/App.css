@@ -72,6 +72,10 @@ a {
    background-position: center;
    height: 100%;
 }
+/* .postImage img {
+   width: 100%;
+   height: auto;
+} */
 
 .postTitle {
    margin-bottom: 5px;
@@ -106,7 +110,7 @@ i {
 .actions {
    display: flex;
    flex-direction: row;
-   padding: 5px 15px;
+   padding: 5px 15px 15px;
    justify-content: space-around;
 }
 
@@ -196,7 +200,7 @@ i {
       grid-column: 1;
       grid-row-end: span 1;
    }
-   .detailed .postImage {
+   /* .detailed .postImage {
       height: 50vh;
-   }
+   } */
 }
