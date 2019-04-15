@@ -6,9 +6,11 @@ class DetailedView extends Component {
       post: [],
       loading: true
    }
+   baseUrl = "https://xcelerator-backend.herokuapp.com"
+
    componentDidMount() {
       if (this.props.location.hasOwnProperty('state')) {
-         axios.get('http://localhost:3006/api/posts/' + this.props.location.state.id)
+         axios.get(`${this.baseUrl}/api/posts/${this.props.location.state.id}`)
             .then(response => {
                if (response.hasOwnProperty('data')) {
                   console.log('response', response['data']['data'][0]);
@@ -27,7 +29,7 @@ class DetailedView extends Component {
    }
 
    handleActions = (actionType, id) => {
-      axios.patch(`http://localhost:3006/api/posts/${id}`, { type: actionType })
+      axios.patch(`${this.baseUrl}/api/posts/${id}`, { type: actionType })
          .then(response => {
             // console.log('response from server', response);
             let posts = [...this.state.post];
@@ -61,10 +63,14 @@ class DetailedView extends Component {
    render() {
       let post = null;
       if (this.state.loading) {
-         post = <div>Loading...</div>
+         post = (
+            <div className="item item--full detailed placeholderItem">
+               <div className="skeleton"></div>
+            </div>
+         );
       } else {
          post = (
-            <div className="item item--full detailed">
+            <div className="item item--full detailed" style={{marginBottom: '2rem'}}>
                <div style={{ backgroundImage: `url(${JSON.stringify(this.state.post[0]['imageUrl'])})` }} className={`postImage`}></div>
                <div className="item__details">
                   <div className="postTitle"> {this.state.post[0]['title']}</div>

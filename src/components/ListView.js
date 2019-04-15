@@ -11,9 +11,11 @@ class ListView extends Component {
       bookmarked: false,
       loading: true
    }
+   baseUrl = "https://xcelerator-backend.herokuapp.com"
 
    componentDidMount() {
-      axios.get('http://localhost:3006/api/posts')
+      console.log(this.baseUrl);
+      axios.get(`${this.baseUrl}/api/posts`)
          .then(response => {
             console.log('response', response)
             if (response.hasOwnProperty('data')) {
@@ -32,7 +34,7 @@ class ListView extends Component {
 
 
    handleActions = (actionType, id) => {
-      axios.patch(`http://localhost:3006/api/posts/${id}`, { type: actionType })
+      axios.patch(`${this.baseUrl}/api/posts/${id}`, { type: actionType })
          .then(response => {
             // console.log('response from server', response);
             let posts = [...this.state.posts];
@@ -71,7 +73,25 @@ class ListView extends Component {
    render() {
       let posts;
       if (this.state.loading) {
-         posts = <div>Loading...</div>
+         posts = (
+            <div className="grid">
+               <div className="item item--medium placeholderItem">
+                  <div className="skeleton"></div>
+               </div>
+               <div className="item item--large">
+                  <div className="skeleton"></div>
+               </div>
+               <div className="item item--medium">
+                  <div className="skeleton"></div>
+               </div>
+               <div className="item item--large">
+                  <div className="skeleton"></div>
+               </div>
+               <div className="item item--medium">
+                  <div className="skeleton"></div>
+               </div>
+            </div>
+         );
       } else {
          posts = this.state.posts.map((post, index) => {
             return (
