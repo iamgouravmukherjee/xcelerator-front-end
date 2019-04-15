@@ -7,5 +7,5 @@ Please follow the instructions listed below:
 2. Install the dependencies using the command
 ### `npm install`
 
-3. Start the app by typing 
-### `npm start`
+3. Start the app by typing the following the command
+### `npm run dev`
